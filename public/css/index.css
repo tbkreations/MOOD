@@ -1,0 +1,19 @@
+html {
+    background-color: #170c00;
+}
+.landingMain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#landingTitle {
+    font-size: 15vmin;
+    margin-bottom: 0;
+    color: #ffcf9c;
+}
+
+#landingSubTitle {
+    font-size: 2.5vmin;
+    color: #ffcf9c;
+}

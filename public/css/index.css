@@ -1,19 +1,118 @@
+/* Uni Styles */
 html {
     background-color: #170c00;
+}
+a {
+    text-decoration: none;
+}
+
+/* Containers */
+.btn-container {
+    margin: 5px;
 }
 .landingMain {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+.homeMain {
+    display: flex;
+    align-items: center;
+}
+.moodMain {
+    display: flex;
+    align-items: center;
+}
+.artistsMain {
+    display: flex;
+    align-items: center;
+}
+.songsMain {
+    display: flex;
+    align-items: center;
+}
+.sideNav {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    border-right: 2px solid #d18446;
+    padding: 1em;
+}
+.centerContainer {
+    display: flex;
+    margin: 0 auto;
+}
+.profileContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+}
 
+/* Text */
 #landingTitle {
     font-size: 15vmin;
     margin-bottom: 0;
     color: #ffcf9c;
 }
-
+#sideNavTitle {
+    font-size: 5vmin;
+    color: #ffcf9c;
+    margin-bottom: 10px;
+}
+#sideNavSubTitle {
+    font-size: 2.5vmin;
+    margin: 0 auto;
+    color: #ffcf9c;
+}
 #landingSubTitle {
     font-size: 2.5vmin;
     color: #ffcf9c;
+}
+#profileName {
+    color: #ffcf9c;
+    font-size: 2.5vmin;
+    display: flex;
+}
+
+/* Components ie. Buttons, Menu-Items */
+.navListItem {
+    margin: 0;
+    width: fit-content;
+    list-style: none;
+    color: #d18446;
+    font-size: 3vmin;
+    padding: 10px 0 10px 0;
+    transition: all .2s ease-in-out;
+}
+.btn-std-light {
+    padding: 5px;
+    font-size: 2vmin;
+    background-color: #ffcf9c;
+    color: #170c00;
+    border-radius: 8px;
+    transition: all .15s ease-in-out;
+}
+
+/* Psuedo Classes */
+.btn-std-light:focus {
+    outline: none;
+}
+.btn-std-light:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+.navListItem:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+a:visited {
+    color: #d18446;
+    text-decoration: none;
+}
+.navItemSelected {
+    background-color: rgba(255, 207, 156, .25);
+    border-radius: 5px;
+    padding: 5px;
+    width: fit-content;
 }

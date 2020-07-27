@@ -33,6 +33,7 @@ a {
 }
 .sideNav {
     display: flex;
+    width: 20vw;
     height: 100vh;
     flex-direction: column;
     border-right: 2px solid #d18446;
@@ -48,6 +49,13 @@ a {
     right: 0;
     padding: 1em;
 }
+.recentPlaysContainer {
+    position: absolute;
+    border-bottom: 2px solid #d18446;
+    width: 75vw;
+    top: 15em;
+    left: 26.5em;
+}
 
 /* Text */
 #landingTitle {
@@ -59,11 +67,14 @@ a {
     font-size: 5vmin;
     color: #ffcf9c;
     margin-bottom: 10px;
+    transition: all .6s ease-out;
 }
 #sideNavSubTitle {
     font-size: 2.5vmin;
-    margin: 0 auto;
+    white-space: nowrap;
+    margin: 0;
     color: #ffcf9c;
+    transition: all .55s ease-out;
 }
 #landingSubTitle {
     font-size: 2.5vmin;
@@ -83,7 +94,6 @@ a {
     color: #d18446;
     font-size: 3vmin;
     padding: 10px 0 10px 0;
-    transition: all .2s ease-in-out;
 }
 .btn-std-light {
     padding: 5px;
@@ -91,7 +101,7 @@ a {
     background-color: #ffcf9c;
     color: #170c00;
     border-radius: 8px;
-    transition: all .15s ease-in-out;
+    transition: all .75s ease-out;
 }
 
 /* Psuedo Classes */

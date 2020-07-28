@@ -16,7 +16,6 @@ let scopes = ['user-read-private', 'user-library-read', 'user-library-modify', '
 
 //Create Spotify Auth URL
 let authorizeURL = spotifyApi.createAuthorizeURL(scopes);
-console.log(authorizeURL);
 
 //views
 router.get('/', (req, res) => res.render("landing"));
@@ -25,14 +24,14 @@ router.get('/home', async (req, res) => {
     try {
         //async requests
         let getMeResult = await spotifyApi.getMe();
-        let getTopArtistsResult = await spotifyApi.getMyTopArtists({limit: 25});
+        let getTopArtistsResult = await spotifyApi.getMyTopArtists({limit: 18});
+        
+        //artist array by affinity 0-10
+        let topArtists = getTopArtistsResult.body.items;
 
-        //sort top Artists by popularity
-        artistSort(getTopArtistsResult.body.items);
-
-        // res.send(getTopArtistsResult.body.items);
+        // res.send(topArtists);
         res.render('home', {
-            topArtists: getTopArtistsResult.body.items,
+            topArtists: topArtists,
             name: getMeResult.body.display_name
         })
     } catch (err) {
@@ -43,7 +42,7 @@ router.get('/home', async (req, res) => {
 router.get('/mood', async (req, res) => {
     try {
         let result = await spotifyApi.getMe();
-        console.log(result.body);
+
         res.render('mood', {
             name: result.body.display_name
         })
@@ -55,7 +54,6 @@ router.get('/mood', async (req, res) => {
 router.get('/artists', async (req, res) => {
     try {
         let result = await spotifyApi.getMe();
-        console.log(result.body);
         res.render('artists', {
             name: result.body.display_name
         })
@@ -67,7 +65,6 @@ router.get('/artists', async (req, res) => {
 router.get('/songs', async (req, res) => {
     try {
         let result = await spotifyApi.getMe();
-        console.log(result.body);
         res.render('songs', {
             name: result.body.display_name
         })

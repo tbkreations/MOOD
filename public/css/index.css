@@ -17,7 +17,6 @@ a {
 }
 .homeMain {
     display: flex;
-    align-items: center;
 }
 .moodMain {
     display: flex;
@@ -33,7 +32,7 @@ a {
 }
 .sideNav {
     display: flex;
-    width: 20vw;
+    width: fit-content;
     height: 100vh;
     flex-direction: column;
     border-right: 2px solid #d18446;
@@ -41,13 +40,29 @@ a {
 }
 .centerContainer {
     display: flex;
-    margin: 0 auto;
+    margin: 0;
+    flex-direction: column;
 }
 .profileContainer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1em;
+    align-self: flex-end;
+    margin: 0;
+    padding: .25em;
+}
+.albumContainer {
+    transition: all .20s ease-in-out;
+    margin: 1em 0 1em 0;
+}
+.albumName {
+    color: #ffcf9c;
+}
+.topArtistContainer {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    height: fit-content;
+    flex-wrap: wrap;
+    position: relative;
+    left: 2em;
 }
 .recentPlaysContainer {
     position: absolute;
@@ -69,6 +84,13 @@ a {
     margin-bottom: 10px;
     transition: all .6s ease-out;
 }
+.containerHeading {
+    color: #ffcf9c;
+    font-size: 4vmin;
+    position: relative;
+    margin: 0;
+    left: 1em;
+}
 #sideNavSubTitle {
     font-size: 2.5vmin;
     white-space: nowrap;
@@ -86,7 +108,7 @@ a {
     display: flex;
 }
 
-/* Components ie. Buttons, Menu-Items */
+/* Components ie. Buttons, images, Menu-Items */
 .navListItem {
     margin: 0;
     width: fit-content;
@@ -103,6 +125,11 @@ a {
     border-radius: 8px;
     transition: all .75s ease-out;
 }
+.artistPlaylistCover {
+    width: 15em;
+    height: 15em;
+    margin: .5em;
+}
 
 /* Psuedo Classes */
 .btn-std-light:focus {
@@ -115,6 +142,10 @@ a {
 .navListItem:hover {
     transform: scale(1.1);
     cursor: pointer;
+}
+.albumContainer:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }
 a:visited {
     color: #d18446;

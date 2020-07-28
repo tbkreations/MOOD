@@ -1,4 +1,4 @@
-module.exports = artistSort = (artistArr => {
+module.exports = artistSortByPopularity = (artistArr => {
     console.log(artistArr.length + " artists");
     let smallestIndex = 0;
     let currentIndex = 1;

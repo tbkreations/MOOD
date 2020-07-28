@@ -11,12 +11,20 @@
   </div>
   <div class="centerContainer">
     <div class="profileContainer">
-      <h3 id="profileName">Welcome <%= name %></h3>
+      <h3 id="profileName">hello, <%= name %></h3>
     </div>
-    <div class="recentPlaysContainer">
-      <div class="albumContainer">
-        <img src="">
+    <h2 class="containerHeading">More from your favorites</h2>
+    <div class="topArtistContainer">
+      <% topArtists.forEach((artist) => { %>
+      <div data-id="<%=artist.id%>" class="albumContainer">
+        <img
+          class="artistPlaylistCover"
+          src="<%=artist.images[0].url%>"
+          alt="<%=artist.name%> image"
+        />
+        <div class="albumName"><%=artist.name%></div>
       </div>
+      <% }) %>
     </div>
   </div>
 </div>

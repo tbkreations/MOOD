@@ -13,17 +13,21 @@
     <div class="profileContainer">
       <h3 id="profileName">hello, <%= name %></h3>
     </div>
-    <h2 class="containerHeading">More from your favorites</h2>
+    <h2 class="containerHeading">Playlists from your favorites</h2>
     <div class="topArtistContainer">
-      <% topArtists.forEach((artist) => { %>
-      <div data-id="<%=artist.id%>" class="albumContainer">
-        <img
-          class="artistPlaylistCover"
-          src="<%=artist.images[0].url%>"
-          alt="<%=artist.name%> image"
-        />
-        <div class="albumName"><%=artist.name%></div>
-      </div>
+      <% let rankCount = 0; %> <% topArtists.forEach((artist) => { %> <%
+      rankCount++ %>
+      <form name="viewPlaylist-<%=artist.id%>" method="POST" action="/home/viewPlaylist/<%=artist.id%>">
+        <div class="albumContainer" onclick="document.forms['viewPlaylist-<%=artist.id%>'].submit();">
+          <h1 class="contentRankingHeading"><%= rankCount %></h1>
+          <img
+            class="artistPlaylistCover"
+            src="<%=artist.images[0].url%>"
+            alt="<%=artist.name%> image"
+          />
+          <div class="albumName"><%=artist.name%></div>
+        </div>
+      </form>
       <% }) %>
     </div>
   </div>

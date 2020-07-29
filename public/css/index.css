@@ -91,6 +91,14 @@ a {
     margin: 0;
     left: 1em;
 }
+.contentRankingHeading {
+    color: #ffcf9c;
+    margin: 0;
+    position: relative;
+    top: .6em;
+    font-size: 2.5em;
+    height: fit-content;
+}
 #sideNavSubTitle {
     font-size: 2.5vmin;
     white-space: nowrap;

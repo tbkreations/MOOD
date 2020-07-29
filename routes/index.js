@@ -24,7 +24,7 @@ router.get('/home', async (req, res) => {
     try {
         //async requests
         let getMeResult = await spotifyApi.getMe();
-        let getTopArtistsResult = await spotifyApi.getMyTopArtists({limit: 18});
+        let getTopArtistsResult = await spotifyApi.getMyTopArtists({limit: 36});
         
         //artist array by affinity 0-10
         let topArtists = getTopArtistsResult.body.items;
@@ -34,6 +34,23 @@ router.get('/home', async (req, res) => {
             topArtists: topArtists,
             name: getMeResult.body.display_name
         })
+    } catch (err) {
+        res.status(400).send(err);
+    }
+})
+
+router.post('/home/viewPlaylist/:id', async (req, res) => {
+    try {
+        //request to artist top songs api
+        let getArtistTopTracks = await spotifyApi.getArtistTopTracks(req.params.id, 'US');
+
+        let trackID = [];
+        for (track = 0; track < 10; track++) {
+            trackID.push(getArtistTopTracks.body.tracks[track].id);
+            console.log(`Track ${track}: ${getArtistTopTracks.body.tracks[track].name}`);
+        }
+
+        res.send(getArtistTopTracks.body);
     } catch (err) {
         res.status(400).send(err);
     }

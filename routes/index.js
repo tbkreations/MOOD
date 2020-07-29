@@ -1,24 +1,56 @@
 const express = require('express');
 const router = express.Router();
+const spotifyDataHelpers = require('../helpers/spotifyArrays');
 const dotenv = require('dotenv').config();
 const SpotifyWebApi = require('spotify-web-api-node');
 
+//Init Spotify API Object
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
     redirectUri: process.env.CALLBACK_URL,
 })
 
+//Auth Scopes Dictionary
+let scopes = ['user-read-private', 'user-library-read', 'user-library-modify', 'user-top-read', 'user-read-recently-played', 'user-read-playback-position', 'user-read-email', 'playlist-modify-public', 'playlist-modify-private', 'playlist-read-collaborative'];
+
+//Create Spotify Auth URL
+let authorizeURL = spotifyApi.createAuthorizeURL(scopes);
+
 //views
 router.get('/', (req, res) => res.render("landing"));
 
 router.get('/home', async (req, res) => {
     try {
-        let result = await spotifyApi.getMe();
-        console.log(result.body);
+        //async requests
+        let getMeResult = await spotifyApi.getMe();
+        let getTopArtistsResult = await spotifyApi.getMyTopArtists({limit: 36});
+        
+        //artist array by affinity 0-10
+        let topArtists = getTopArtistsResult.body.items;
+
+        // res.send(topArtists);
         res.render('home', {
-            name: result.body.display_name
+            topArtists: topArtists,
+            name: getMeResult.body.display_name
         })
+    } catch (err) {
+        res.status(400).send(err);
+    }
+})
+
+router.post('/home/viewPlaylist/:id', async (req, res) => {
+    try {
+        //request to artist top songs api
+        let getArtistTopTracks = await spotifyApi.getArtistTopTracks(req.params.id, 'US');
+
+        let trackID = [];
+        for (track = 0; track < 10; track++) {
+            trackID.push(getArtistTopTracks.body.tracks[track].id);
+            console.log(`Track ${track}: ${getArtistTopTracks.body.tracks[track].name}`);
+        }
+
+        res.send(getArtistTopTracks.body);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -27,7 +59,7 @@ router.get('/home', async (req, res) => {
 router.get('/mood', async (req, res) => {
     try {
         let result = await spotifyApi.getMe();
-        console.log(result.body);
+
         res.render('mood', {
             name: result.body.display_name
         })
@@ -39,7 +71,6 @@ router.get('/mood', async (req, res) => {
 router.get('/artists', async (req, res) => {
     try {
         let result = await spotifyApi.getMe();
-        console.log(result.body);
         res.render('artists', {
             name: result.body.display_name
         })
@@ -51,7 +82,6 @@ router.get('/artists', async (req, res) => {
 router.get('/songs', async (req, res) => {
     try {
         let result = await spotifyApi.getMe();
-        console.log(result.body);
         res.render('songs', {
             name: result.body.display_name
         })
@@ -61,10 +91,6 @@ router.get('/songs', async (req, res) => {
 })
 
 router.get('/spotifyLogin', (req, res) => {
-    let scopes = ['user-read-private', 'user-read-email', 'playlist-modify-public', 'playlist-modify-private'];
-    let authorizeURL = spotifyApi.createAuthorizeURL(scopes);
-    console.log(authorizeURL);
-    //res.redirect(authorizeURL + "&show_dialog=true");
     res.redirect(authorizeURL + "&show_dialog=true");
 })
 
